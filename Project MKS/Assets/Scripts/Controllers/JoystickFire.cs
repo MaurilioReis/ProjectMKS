@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JoystickMove : MonoBehaviour
+public class JoystickFire : MonoBehaviour
 {
     Touch touchJoystic;
     Vector2 startPositionTouch;
@@ -12,26 +12,20 @@ public class JoystickMove : MonoBehaviour
     [Header("Configurations Joystic")]
     public float reguleDistance = 150;
 
-    [Space(10)]
+    public Transform frontalFirePath;
+    public Transform sideFirePath;
 
-    [Header("Components Player")]
-    Rigidbody2D rbPlayer;
-    PlayerAttributes attributes;
 
 
     void Start()
     {
-        touchJoystic = new Touch {  fingerId = -1 };
+        touchJoystic = new Touch { fingerId = -1 };
 
-        centerJoystick = gameObject.transform.GetChild(0).GetComponent<RectTransform>();
+        centerJoystick = gameObject.transform.GetChild(1).GetComponent<RectTransform>();
 
         startPositionTouch = centerJoystick.position;
 
         alphaController = gameObject.GetComponent<CanvasGroup>();
-
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        rbPlayer = player.GetComponent<Rigidbody2D>();
-        attributes = player.GetComponent<PlayerAttributes>();
     }
 
 
@@ -45,7 +39,7 @@ public class JoystickMove : MonoBehaviour
                 if(touchJoystic.fingerId == -1)
                 {
                     // Register touch
-                    if (Input.GetTouch(numberTouch).position.x < Screen.width / 2 && Input.GetTouch(numberTouch).position.y < Screen.height / 2)
+                    if (Input.GetTouch(numberTouch).position.x > Screen.width / 2 && Input.GetTouch(numberTouch).position.y < Screen.height / 2)
                     {
                         touchJoystic = Input.GetTouch(numberTouch);
 
@@ -75,27 +69,21 @@ public class JoystickMove : MonoBehaviour
                     Vector2 direction = touchJoystic.position - startPositionTouch;
                     centerJoystick.position = startPositionTouch + Vector2.ClampMagnitude(direction, reguleDistance);
 
-                    Vector2 distanceMoveJoystick = (Vector2)centerJoystick.position - (Vector2)gameObject.transform.position;
-
-                    Vector2 directionJoystick = new Vector2(distanceMoveJoystick.x / reguleDistance, distanceMoveJoystick.y / reguleDistance);
-
-                    float sensitivyJoystick = distanceMoveJoystick.magnitude / reguleDistance;
-
                     float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                    rbPlayer.transform.rotation = Quaternion.Slerp(rbPlayer.transform.rotation, Quaternion.Euler(0, 0, angle), attributes.speedRotation * sensitivyJoystick * Time.deltaTime);
 
-                    rbPlayer.AddForce (directionJoystick * attributes.speed, ForceMode2D.Force);
-                    //rbPlayer.velocity = directionJoystick * attributes.speed * sensitivyJoystick;
+                    Vector2 distanceMoveJoystick = (Vector2)centerJoystick.position - (Vector2)gameObject.transform.position;
+                    Vector2 directionJoystick = new Vector2 (distanceMoveJoystick.x / reguleDistance, distanceMoveJoystick.y / reguleDistance);
+
+                    frontalFirePath.transform.rotation = Quaternion.Slerp(frontalFirePath.transform.rotation, Quaternion.Euler(0, 0, angle), 100 * Time.deltaTime);
                 }
             }
         }
 
         //unselected
-        if(alphaController.alpha > 0 && touchJoystic.fingerId == -1)
+        if (alphaController.alpha > 0 && touchJoystic.fingerId == -1)
         {
             centerJoystick.position = Vector2.MoveTowards(centerJoystick.position, startPositionTouch, 10);
             alphaController.alpha -= Time.deltaTime;
         }
     }
-
 }
