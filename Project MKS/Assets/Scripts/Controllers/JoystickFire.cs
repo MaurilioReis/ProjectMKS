@@ -1,19 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class JoystickFire : MonoBehaviour
 {
     Touch touchJoystic;
     Vector2 startPositionTouch;
     RectTransform centerJoystick;
+
+    Animator arcAnim;
+
     CanvasGroup alphaController;
 
     [Header("Configurations Joystic")]
-    public float reguleDistance = 150;
+    public float reguleDistance = 200;
+    [Space(10)]
+    public Image icon;
+    public Sprite[] iconsSprites;
+    [Space(10)]
+    public Image iconBackGround;
+    public Sprite[] iconsSpritesBg;
 
-    public Transform frontalFirePath;
-    public Transform sideFirePath;
+    [Space (10)]
+    [Header("Configurations path aim")]
+    public Transform rotTrajectoryController;
+    public TrajectoryDirection scriptTrajectory;
 
 
 
@@ -21,7 +33,8 @@ public class JoystickFire : MonoBehaviour
     {
         touchJoystic = new Touch { fingerId = -1 };
 
-        centerJoystick = gameObject.transform.GetChild(1).GetComponent<RectTransform>();
+        centerJoystick = gameObject.transform.GetChild(2).GetComponent<RectTransform>();
+        arcAnim = gameObject.transform.GetChild(1).GetComponent<Animator>();
 
         startPositionTouch = centerJoystick.position;
 
@@ -63,6 +76,17 @@ public class JoystickFire : MonoBehaviour
                 if (touchJoystic.phase == TouchPhase.Canceled || touchJoystic.phase == TouchPhase.Ended)
                 {
                     touchJoystic = new Touch { fingerId = -1 };
+
+                    icon.sprite = iconsSprites[0];
+                    iconBackGround.sprite = iconsSpritesBg[0];
+
+                    // if cooldown
+                    // FIRE
+
+                    scriptTrajectory.triggerFire = false;
+                    scriptTrajectory.lockAim = 0;
+
+                    arcAnim.SetInteger("InsideOutside", 0);
                 }
                 else // Movement
                 {
@@ -71,10 +95,29 @@ public class JoystickFire : MonoBehaviour
 
                     float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-                    Vector2 distanceMoveJoystick = (Vector2)centerJoystick.position - (Vector2)gameObject.transform.position;
-                    Vector2 directionJoystick = new Vector2 (distanceMoveJoystick.x / reguleDistance, distanceMoveJoystick.y / reguleDistance);
+                    Vector2 distanceMoveJoystick = (Vector2)centerJoystick.position / reguleDistance - (Vector2)gameObject.transform.position / reguleDistance;
 
-                    frontalFirePath.transform.rotation = Quaternion.Slerp(frontalFirePath.transform.rotation, Quaternion.Euler(0, 0, angle), 100 * Time.deltaTime);
+                    rotTrajectoryController.transform.rotation = Quaternion.Slerp(rotTrajectoryController.transform.rotation, Quaternion.Euler(0, 0, angle), 100 * Time.deltaTime);
+
+                    icon.sprite = iconsSprites[scriptTrajectory.sideAim];
+
+                    if (distanceMoveJoystick.magnitude < 0.75f)
+                    {
+                        iconBackGround.sprite = iconsSpritesBg[0];
+
+                        scriptTrajectory.triggerFire = false;
+                        scriptTrajectory.lockAim = 5;
+
+                        arcAnim.SetInteger("InsideOutside", 1);
+                    }
+                    else
+                    {
+                        iconBackGround.sprite = iconsSpritesBg[scriptTrajectory.sideAim];
+
+                        scriptTrajectory.triggerFire = true;
+
+                        arcAnim.SetInteger("InsideOutside", 2);
+                    }
                 }
             }
         }
