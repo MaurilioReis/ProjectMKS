@@ -7,7 +7,7 @@ public class PlayerAttributes : MonoBehaviour
     [Range(0.1f, 1000)]
     public float maxLife;
 
-    [Range (1, 10)]
+    [Range (0, 10)]
     public float speed = 2;
 
     [Range(1, 10)]

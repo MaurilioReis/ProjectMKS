@@ -27,6 +27,11 @@ public class JoystickFire : MonoBehaviour
     public Transform rotTrajectoryController;
     public TrajectoryDirection scriptTrajectory;
 
+    [Space(10)]
+    [Header("Spawns to fire")]
+    public GameObject[] Spawns;
+    public int amountSpawns;
+    Rigidbody2D rbSpawns;
 
 
     void Start()
@@ -82,8 +87,15 @@ public class JoystickFire : MonoBehaviour
 
                     // if cooldown
                     // FIRE
+                    if(scriptTrajectory.triggerFire == true)
+                    {
+                        Vector2 posSpawn = new Vector2(rotTrajectoryController.position.x + 0.6f, rotTrajectoryController.position.y);
+                        GameObject instance = Instantiate(Spawns[0], posSpawn, rotTrajectoryController.rotation) as GameObject;
+                        rbSpawns = instance.GetComponent<Rigidbody2D>();
+                        rbSpawns.AddForce(rotTrajectoryController.right * 150, ForceMode2D.Force);
+                        scriptTrajectory.triggerFire = false;
+                    }
 
-                    scriptTrajectory.triggerFire = false;
                     scriptTrajectory.lockAim = 0;
 
                     arcAnim.SetInteger("InsideOutside", 0);
