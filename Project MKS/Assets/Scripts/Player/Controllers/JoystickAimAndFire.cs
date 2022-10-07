@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class JoystickFire : MonoBehaviour
+public class JoystickAimAndFire : MonoBehaviour
 {
     Touch touchJoystic;
     Vector2 startPositionTouch;
@@ -14,25 +14,23 @@ public class JoystickFire : MonoBehaviour
     CanvasGroup alphaController;
 
     [Header("Configurations Joystic")]
+    [Header("Element 0 Canceled / 1 front / 2 left / 3 right / 4 back / 5 neutral ")]
+
+    [Space(10)]
     public float reguleDistance = 200;
+    
     [Space(10)]
     public Image icon;
     public Sprite[] iconsSprites;
+
     [Space(10)]
     public Image iconBackGround;
     public Sprite[] iconsSpritesBg;
 
     [Space (10)]
     [Header("Configurations path aim")]
-    public Transform rotTrajectoryController;
-    public TrajectoryDirection scriptTrajectory;
-
-    [Space(10)]
-    [Header("Spawns to fire")]
-    public GameObject[] Spawns;
-    public int amountSpawns;
-    Rigidbody2D rbSpawns;
-
+    public Transform RotationVerifySides;
+    public AimDirectionAndFire scriptTrajectoryFire;
 
     void Start()
     {
@@ -85,18 +83,13 @@ public class JoystickFire : MonoBehaviour
                     icon.sprite = iconsSprites[0];
                     iconBackGround.sprite = iconsSpritesBg[0];
 
-                    // if cooldown
-                    // FIRE
-                    if(scriptTrajectory.triggerFire == true)
+                    if(scriptTrajectoryFire.triggerFire == true)
                     {
-                        Vector2 posSpawn = new Vector2(rotTrajectoryController.position.x + 0.6f, rotTrajectoryController.position.y);
-                        GameObject instance = Instantiate(Spawns[0], posSpawn, rotTrajectoryController.rotation) as GameObject;
-                        rbSpawns = instance.GetComponent<Rigidbody2D>();
-                        rbSpawns.AddForce(rotTrajectoryController.right * 150, ForceMode2D.Force);
-                        scriptTrajectory.triggerFire = false;
+                        scriptTrajectoryFire.StartCoroutine("Fire");
+                        scriptTrajectoryFire.triggerFire = false;
                     }
 
-                    scriptTrajectory.lockAim = 0;
+                    scriptTrajectoryFire.lockAim = 0;
 
                     arcAnim.SetInteger("InsideOutside", 0);
                 }
@@ -109,24 +102,24 @@ public class JoystickFire : MonoBehaviour
 
                     Vector2 distanceMoveJoystick = (Vector2)centerJoystick.position / reguleDistance - (Vector2)gameObject.transform.position / reguleDistance;
 
-                    rotTrajectoryController.transform.rotation = Quaternion.Slerp(rotTrajectoryController.transform.rotation, Quaternion.Euler(0, 0, angle), 100 * Time.deltaTime);
+                    RotationVerifySides.transform.rotation = Quaternion.Slerp(RotationVerifySides.transform.rotation, Quaternion.Euler(0, 0, angle), 100 * Time.deltaTime);
 
-                    icon.sprite = iconsSprites[scriptTrajectory.sideAim];
+                    icon.sprite = iconsSprites[scriptTrajectoryFire.sideAim];
 
-                    if (distanceMoveJoystick.magnitude < 0.75f)
+                    if (distanceMoveJoystick.magnitude < 0.75f) // verify distance Joystick
                     {
                         iconBackGround.sprite = iconsSpritesBg[0];
 
-                        scriptTrajectory.triggerFire = false;
-                        scriptTrajectory.lockAim = 5;
+                        scriptTrajectoryFire.triggerFire = false;
+                        scriptTrajectoryFire.lockAim = 5;
 
                         arcAnim.SetInteger("InsideOutside", 1);
                     }
-                    else
+                    else if (scriptTrajectoryFire.inAtack == false)
                     {
-                        iconBackGround.sprite = iconsSpritesBg[scriptTrajectory.sideAim];
+                        iconBackGround.sprite = iconsSpritesBg[scriptTrajectoryFire.sideAim];
 
-                        scriptTrajectory.triggerFire = true;
+                        scriptTrajectoryFire.triggerFire = true;
 
                         arcAnim.SetInteger("InsideOutside", 2);
                     }

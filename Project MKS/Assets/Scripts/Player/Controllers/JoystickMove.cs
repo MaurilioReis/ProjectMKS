@@ -16,7 +16,7 @@ public class JoystickMove : MonoBehaviour
 
     [Header("Components Player")]
     Rigidbody2D rbPlayer;
-    PlayerAttributes attributes;
+    AttributesBase attributes;
 
 
     void Start()
@@ -31,7 +31,7 @@ public class JoystickMove : MonoBehaviour
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         rbPlayer = player.GetComponent<Rigidbody2D>();
-        attributes = player.GetComponent<PlayerAttributes>();
+        attributes = player.GetComponent<AttributesBase>();
     }
 
 
@@ -85,12 +85,11 @@ public class JoystickMove : MonoBehaviour
                     rbPlayer.transform.rotation = Quaternion.Slerp(rbPlayer.transform.rotation, Quaternion.Euler(0, 0, angle), attributes.speedRotation * sensitivyJoystick * Time.deltaTime);
 
                     rbPlayer.AddForce (directionJoystick * attributes.speed, ForceMode2D.Force);
-                    //rbPlayer.velocity = directionJoystick * attributes.speed * sensitivyJoystick;
                 }
             }
         }
 
-        //unselected
+        //Unselected
         if(alphaController.alpha > 0 && touchJoystic.fingerId == -1)
         {
             centerJoystick.position = Vector2.MoveTowards(centerJoystick.position, startPositionTouch, 10);
