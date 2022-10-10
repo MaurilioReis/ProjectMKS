@@ -43,7 +43,7 @@ public class ArmamentParameters : MonoBehaviour
         {
             foreach (Transform tempTransform in weaponsRotate)
             {
-                tempTransform.rotation = resetRot;
+                //tempTransform.rotation = Quaternion.ze;
             }
         }
     }
