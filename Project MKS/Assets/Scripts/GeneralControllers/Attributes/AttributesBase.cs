@@ -50,6 +50,7 @@ public class AttributesBase : MonoBehaviour
     CanvasGroup alphaBar;
 
     Image fillBar;
+    Image secondFillBar;
     float valueLifeBar;
 
     ParticleSystem particle;
@@ -67,7 +68,8 @@ public class AttributesBase : MonoBehaviour
 
         alphaBar = instantiateLifeBar.GetComponent<CanvasGroup>();
 
-        fillBar = instantiateLifeBar.transform.GetChild(1).GetComponent<Image>();
+        fillBar = instantiateLifeBar.transform.GetChild(2).GetComponent<Image>();
+        secondFillBar = instantiateLifeBar.transform.GetChild(1).GetComponent<Image>();
         valueLifeBar = maxLife;
 
         particle = instantiateLifeBar.GetComponent<ParticleSystem>();
@@ -81,23 +83,28 @@ public class AttributesBase : MonoBehaviour
         alphaBar.alpha = 1;
         camController.ShakeCam();
         particle.Play();
-        instantiateLifeBar.transform.localScale -= new Vector3(1.5f, 1.5f, 1.5f);
+        instantiateLifeBar.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 
-        Debug.Log("life: " + valueLifeBar + " / Receive: " + valueDmg + " / Current life: " + fillBar.fillAmount * 500);
+        // Debug.Log("life: " + valueLifeBar + " / Receive: " + valueDmg + " / Current life: " + fillBar.fillAmount * 500);
     }
 
     private void FixedUpdate()
     {
         if (alphaBar.alpha > 0.3f)
         {
-            alphaBar.alpha -= Time.deltaTime / 2;
+            alphaBar.alpha -= Time.deltaTime * 0.3f;
+        }
+
+        if (fillBar.fillAmount < secondFillBar.fillAmount)
+        {
+            secondFillBar.fillAmount -= Time.deltaTime * 0.1f;
         }
 
         if(instantiateLifeBar.transform.localScale.x > 1)
         {
             instantiateLifeBar.transform.localScale -= new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime);
         }
-        else
+        else if (instantiateLifeBar.transform.localScale.x < 1)
         {
             instantiateLifeBar.transform.localScale = new Vector3(1, 1, 1);
         }
