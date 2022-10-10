@@ -37,32 +37,69 @@ public class AttributesBase : MonoBehaviour
     public float[] cooldowns = new float[5];
 
     [Space(10)]
+    CamController camController;
+
+    [Space(10)]
     [Header("Life Bar")]
     public GameObject prefabBar;
+    GameObject instantiateLifeBar;
+
     PositionConstraint constraint;
     ConstraintSource myConstraintSource;
+
+    CanvasGroup alphaBar;
+
     Image fillBar;
     float valueLifeBar;
 
+    ParticleSystem particle;
+
     void Start()
     {
-        GameObject instantiateLifeBar = Instantiate(prefabBar) as GameObject;
+        camController = GameObject.FindGameObjectWithTag("Player").GetComponent<CamController>();
+
+        instantiateLifeBar = Instantiate(prefabBar) as GameObject;
 
         constraint = instantiateLifeBar.GetComponent<PositionConstraint>();
         myConstraintSource.sourceTransform = transform;
         myConstraintSource.weight = 1f;
         constraint.AddSource(myConstraintSource);
 
+        alphaBar = instantiateLifeBar.GetComponent<CanvasGroup>();
+
         fillBar = instantiateLifeBar.transform.GetChild(1).GetComponent<Image>();
         valueLifeBar = maxLife;
+
+        particle = instantiateLifeBar.GetComponent<ParticleSystem>();
     }
 
     public void applyDmg(float valueDmg)
     {
         valueLifeBar -= valueDmg;
-        //Debug.Log("Value fill" + valueLifeBar / maxLife);
         fillBar.fillAmount = valueLifeBar / maxLife;
 
+        alphaBar.alpha = 1;
+        camController.ShakeCam();
+        particle.Play();
+        instantiateLifeBar.transform.localScale -= new Vector3(1.5f, 1.5f, 1.5f);
+
         Debug.Log("life: " + valueLifeBar + " / Receive: " + valueDmg + " / Current life: " + fillBar.fillAmount * 500);
+    }
+
+    private void FixedUpdate()
+    {
+        if (alphaBar.alpha > 0.3f)
+        {
+            alphaBar.alpha -= Time.deltaTime / 2;
+        }
+
+        if(instantiateLifeBar.transform.localScale.x > 1)
+        {
+            instantiateLifeBar.transform.localScale -= new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime);
+        }
+        else
+        {
+            instantiateLifeBar.transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 }

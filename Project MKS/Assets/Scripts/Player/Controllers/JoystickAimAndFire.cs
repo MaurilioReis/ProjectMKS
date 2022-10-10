@@ -13,6 +13,8 @@ public class JoystickAimAndFire : MonoBehaviour
 
     CanvasGroup alphaController;
 
+    CamController controllerCam;
+
     [Header("Configurations Joystic")]
     [Header("Element 0 Canceled / 1 front / 2 left / 3 right / 4 back / 5 neutral ")]
 
@@ -32,6 +34,7 @@ public class JoystickAimAndFire : MonoBehaviour
     public Transform RotationVerifySides;
     public AimDirectionAndFire scriptTrajectoryFire;
 
+
     void Start()
     {
         touchJoystic = new Touch { fingerId = -1 };
@@ -42,6 +45,8 @@ public class JoystickAimAndFire : MonoBehaviour
         startPositionTouch = centerJoystick.position;
 
         alphaController = gameObject.GetComponent<CanvasGroup>();
+
+        controllerCam = GameObject.FindGameObjectWithTag("Player").GetComponent<CamController>();
     }
 
 
@@ -92,9 +97,12 @@ public class JoystickAimAndFire : MonoBehaviour
                     scriptTrajectoryFire.lockAim = 0;
 
                     arcAnim.SetInteger("InsideOutside", 0);
+
+                    controllerCam.SetNewLookAt(0);
                 }
                 else // Movement
                 {
+
                     Vector2 direction = touchJoystic.position - startPositionTouch;
                     centerJoystick.position = startPositionTouch + Vector2.ClampMagnitude(direction, reguleDistance);
 
@@ -103,8 +111,6 @@ public class JoystickAimAndFire : MonoBehaviour
                     Vector2 distanceMoveJoystick = (Vector2)centerJoystick.position / reguleDistance - (Vector2)gameObject.transform.position / reguleDistance;
 
                     RotationVerifySides.transform.rotation = Quaternion.Slerp(RotationVerifySides.transform.rotation, Quaternion.Euler(0, 0, angle), 100 * Time.deltaTime);
-
-                    icon.sprite = iconsSprites[scriptTrajectoryFire.sideAim];
 
                     if (distanceMoveJoystick.magnitude < 0.75f) // verify distance Joystick
                     {
@@ -123,6 +129,10 @@ public class JoystickAimAndFire : MonoBehaviour
 
                         arcAnim.SetInteger("InsideOutside", 2);
                     }
+
+                    icon.sprite = iconsSprites[scriptTrajectoryFire.sideAim];
+                    controllerCam.SetNewLookAt(1);
+
                 }
             }
         }
