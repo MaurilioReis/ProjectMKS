@@ -85,7 +85,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,10 +103,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 939682505
+  m_SortingLayer: 7
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: a51b1d54660ba814f888b891593a3c15, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 13aef643c66806749aefbc06b761e7c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -132,3 +132,7 @@ MonoBehaviour:
   ammunition: {fileID: 4777070124447330995, guid: 036d9c930d1359148b018b66ebfa001f, type: 3}
   originsSpawn:
   - {fileID: 7352375540163316313}
+  weaponsRotate:
+  - {fileID: 7371341736647527879}
+  constraint: []
+  inAtack: 0

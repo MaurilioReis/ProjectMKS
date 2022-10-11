@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4299052541553027124}
   - component: {fileID: 4299052541553027122}
   - component: {fileID: 4299052541553027123}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TrailCannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,8 +72,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1800490689
+  m_SortingLayer: 8
   m_SortingOrder: 2
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -4853,9 +4853,9 @@ GameObject:
   - component: {fileID: 8782796034655509593}
   - component: {fileID: 8782796034655509595}
   - component: {fileID: 4299052541860533831}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cannonFireBall
-  m_TagString: Untagged
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4896,7 +4896,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4914,11 +4914,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1800490689
+  m_SortingLayer: 8
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 21c693d07b79a8a48b0bb8027bd3582d, type: 3}
-  m_Color: {r: 0.6792453, g: 0.2915291, b: 0.22107512, a: 1}
+  m_Color: {r: 1, g: 0.78683865, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5063,3 +5063,4 @@ MonoBehaviour:
   prefabExplosion: {fileID: 0}
   prefabImpact: {fileID: 0}
   prefabImpactWhater: {fileID: 0}
+  spawnTest: {fileID: 0}

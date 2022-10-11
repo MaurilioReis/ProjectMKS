@@ -5,18 +5,21 @@ TagManager:
   serializedVersion: 2
   tags:
   - VerifyAim
+  - Wreckage
+  - Fire
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Wreckage
+  - Physic Fire
+  - Intangible Fire
+  - Land
+  - Enemy
   - 
   - 
   - 
@@ -41,4 +44,34 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BackGround
+    uniqueID: 4115447203
+    locked: 0
+  - name: Submerse
+    uniqueID: 3450892243
+    locked: 0
+  - name: Water
+    uniqueID: 1498630725
+    locked: 0
+  - name: FloatingWater
+    uniqueID: 1836812063
+    locked: 0
+  - name: Interface
+    uniqueID: 346963015
+    locked: 0
+  - name: Land
+    uniqueID: 1062774283
+    locked: 0
+  - name: Ship
+    uniqueID: 939682505
+    locked: 0
+  - name: Fire
+    uniqueID: 2494476607
+    locked: 0
+  - name: ' Sky'
+    uniqueID: 251852381
+    locked: 0
+  - name: UI GUI
+    uniqueID: 1061089271
     locked: 0

@@ -13,19 +13,28 @@ public class CannonBall : MonoBehaviour
     public GameObject prefabImpact;
     public GameObject prefabImpactWhater;
 
+    public GameObject spawnTest;
+
+    RandomSpawns randomSpawns;
+
     void Start()
     {
         GameObject smokeFire = Instantiate(prefabSmokeFire, gameObject.transform.position, gameObject.transform.rotation);
         GameObject miniSparks = Instantiate(prefabMiniSparks, gameObject.transform.position, gameObject.transform.rotation);
+
+        randomSpawns = gameObject.GetComponent<RandomSpawns>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
         {
             AttributesBase scriptAttributes = collision.gameObject.GetComponent<AttributesBase>();
             scriptAttributes.applyDmg(dmg);
+
         }
+
+        GameObject test = Instantiate(spawnTest, gameObject.transform.position, gameObject.transform.rotation);
 
         Destroy(gameObject);
     }
