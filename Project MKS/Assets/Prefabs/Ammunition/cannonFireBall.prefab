@@ -5063,4 +5063,9 @@ MonoBehaviour:
   prefabExplosion: {fileID: 0}
   prefabImpact: {fileID: 0}
   prefabImpactWhater: {fileID: 0}
+  spawnsStart:
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnsImpactWoods: []
+  spawnsAutoDestroy: []
   spawnTest: {fileID: 0}

@@ -32,7 +32,7 @@ public class JoystickAimAndFire : MonoBehaviour
     [Space (10)]
     [Header("Configurations path aim")]
     public Transform RotationVerifySides;
-    public AimDirectionAndFire scriptTrajectoryFire;
+    public AimDirectionAndFire aimDirectionAndFire;
 
 
     void Start()
@@ -88,13 +88,13 @@ public class JoystickAimAndFire : MonoBehaviour
                     icon.sprite = iconsSprites[0];
                     iconBackGround.sprite = iconsSpritesBg[0];
 
-                    if(scriptTrajectoryFire.triggerFire == true)
+                    if(aimDirectionAndFire.triggerFire == true)
                     {
-                        scriptTrajectoryFire.StartCoroutine("Fire");
-                        scriptTrajectoryFire.triggerFire = false;
+                        aimDirectionAndFire.StartCoroutine("Fire");
+                        aimDirectionAndFire.triggerFire = false;
                     }
 
-                    scriptTrajectoryFire.lockAim = 0;
+                    aimDirectionAndFire.lockAim = 0;
 
                     arcAnim.SetInteger("InsideOutside", 0);
 
@@ -116,21 +116,21 @@ public class JoystickAimAndFire : MonoBehaviour
                     {
                         iconBackGround.sprite = iconsSpritesBg[0];
 
-                        scriptTrajectoryFire.triggerFire = false;
-                        scriptTrajectoryFire.lockAim = 5;
+                        aimDirectionAndFire.triggerFire = false;
+                        aimDirectionAndFire.lockAim = 5;
 
                         arcAnim.SetInteger("InsideOutside", 1);
                     }
-                    else if (scriptTrajectoryFire.inAtack == false)
+                    else if (aimDirectionAndFire.inAtack == false)
                     {
-                        iconBackGround.sprite = iconsSpritesBg[scriptTrajectoryFire.sideAim];
+                        iconBackGround.sprite = iconsSpritesBg[aimDirectionAndFire.sideAim];
 
-                        scriptTrajectoryFire.triggerFire = true;
+                        aimDirectionAndFire.triggerFire = true;
 
                         arcAnim.SetInteger("InsideOutside", 2);
                     }
 
-                    icon.sprite = iconsSprites[scriptTrajectoryFire.sideAim];
+                    icon.sprite = iconsSprites[aimDirectionAndFire.sideAim];
                     controllerCam.SetNewLookAt(1);
 
                 }

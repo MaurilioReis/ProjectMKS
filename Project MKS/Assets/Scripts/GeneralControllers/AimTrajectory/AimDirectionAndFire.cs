@@ -17,14 +17,20 @@ public class AimDirectionAndFire : MonoBehaviour
     [Header("Animations trajectory")]
     public Animator trajectorysAnim;
 
+    [Space(10)]
+    [Header("Ship sprites to be transparent.")]
+    public SpriteRenderer[] spritesShip;
+
 
     [Space(10)]
-    [Header("Spawns config")]
+    [Header("SPAWNS CONFIG")]
     [Header("Element 0 Canceled / 1 front / 2 left / 3 right / 4 back / 5 neutral")]
 
-    [HideInInspector] public float[] cooldowns;
 
+    [Space(10)]
     public ArmamentParameters[] weapons;
+
+    [HideInInspector] public float[] cooldowns;
 
     [Space(10)]
     Transform[] spawnOrigins;
@@ -36,6 +42,7 @@ public class AimDirectionAndFire : MonoBehaviour
     {
         cooldowns = basedAttributes.cooldowns;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
             
@@ -67,10 +74,24 @@ public class AimDirectionAndFire : MonoBehaviour
             if (triggerFire == false)
             {
                 trajectorysAnim.SetInteger("SideAim", lockAim);
+
+                foreach (SpriteRenderer sp in spritesShip)
+                {
+                    Color c = sp.color;
+                    c.a = 1;
+                    sp.color = c;
+                }
             }
             else
             {
                 trajectorysAnim.SetInteger("SideAim", sideAim);
+
+                foreach (SpriteRenderer sp in spritesShip)
+                {
+                    Color c = sp.color;
+                    c.a = 0.3f;
+                    sp.color = c;
+                }
             }
         }
     }
@@ -80,18 +101,20 @@ public class AimDirectionAndFire : MonoBehaviour
         inAtack = true;
 
         int registerSide = sideAim;
-        spawnOrigins = weapons[registerSide].originsSpawn;
+        spawnOrigins = weapons[registerSide].originsPositionsSpawns;
         weapons[registerSide].inAtack = true;
 
         yield return new WaitForSecondsRealtime(timeToSpawn);
 
         for (int nSpawn = 0; nSpawn < spawnOrigins.Length; nSpawn++)
         {
-
             if (spawnOrigins[nSpawn] != null && spawnOrigins[nSpawn].gameObject.activeSelf)
             {
-                GameObject instance = Instantiate(weapons[1].ammunition, spawnOrigins[nSpawn].position, spawnOrigins[nSpawn].rotation) as GameObject;
-                Rigidbody2D rbSpawns = instance.GetComponent<Rigidbody2D>();
+                GameObject fire = Instantiate(weapons[registerSide].ammunition, spawnOrigins[nSpawn].position, spawnOrigins[nSpawn].rotation) as GameObject;
+                FireParameters scriptFire = fire.GetComponent<FireParameters>();
+                scriptFire.maxDistance = weapons[registerSide].GetComponent<ArmamentParameters>().maxDistance;
+
+                Rigidbody2D rbSpawns = fire.GetComponent<Rigidbody2D>();
                 rbSpawns.AddForce(spawnOrigins[nSpawn].transform.right * 150, ForceMode2D.Force);
 
                 // audio

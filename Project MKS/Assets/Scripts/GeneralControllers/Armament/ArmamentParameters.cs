@@ -7,7 +7,8 @@ public class ArmamentParameters : MonoBehaviour
 {
 
     public GameObject ammunition;
-    public Transform[] originsSpawn;
+    public float maxDistance = 2;
+    public Transform[] originsPositionsSpawns;
     
     [Space(10)]
     public Transform[] weaponsRotate;
@@ -23,7 +24,7 @@ public class ArmamentParameters : MonoBehaviour
 
     void Start()
     {
-        resetRot = transform.rotation;
+        resetRot = transform.localRotation;
 
         scriptFather = transform.parent.gameObject.GetComponent<RotateWeaponTrajectory>();
         mainAim = scriptFather.mainAim.transform;
@@ -32,7 +33,7 @@ public class ArmamentParameters : MonoBehaviour
 
     void Update()
     {
-        if(scriptTrajectoryAim.sideAim == scriptFather.sideWeapon && inAtack == false)
+        if(scriptTrajectoryAim.sideAim == scriptFather.sideWeapon && scriptTrajectoryAim.sideAim > 0 && inAtack == false)
         {
             foreach (Transform tempTransform in weaponsRotate)
             {
@@ -43,7 +44,7 @@ public class ArmamentParameters : MonoBehaviour
         {
             foreach (Transform tempTransform in weaponsRotate)
             {
-                //tempTransform.rotation = Quaternion.ze;
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, resetRot, Time.deltaTime * 3);
             }
         }
     }
