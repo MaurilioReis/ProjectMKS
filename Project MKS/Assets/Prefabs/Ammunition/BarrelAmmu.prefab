@@ -217,6 +217,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 200
+  startSpeed: 1.5
+  distanceSpeed: 0.3
+  distanceDirection: {fileID: 0}
+  distanceAltereSpeed: 0.7
+  setAngularVelocity: 0
+  minAngularVelocity: -200
+  maxAngularVelocity: 200
   spawnsStart: []
   spawnsInTimer: []
   timerSpawns: 0
@@ -226,4 +233,6 @@ MonoBehaviour:
   colliderDisabled:
   - {fileID: 17289867412037452}
   distanceActiveColliders: 0.3
+  startPositionOrigin: {x: 0, y: 0}
+  directionOrigin: {x: 0, y: 0}
   maxDistance: 0

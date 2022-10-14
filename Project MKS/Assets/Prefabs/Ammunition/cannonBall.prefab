@@ -5058,6 +5058,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 100
+  startSpeed: 2
+  distanceSpeed: 0
+  distanceDirection: {fileID: 0}
+  distanceAltereSpeed: 0
+  setAngularVelocity: 0
+  minAngularVelocity: 0
+  maxAngularVelocity: 0
   spawnsStart:
   - {fileID: 6934473409629643790, guid: f2685e0c2840be94c96922777b5283fc, type: 3}
   - {fileID: 8727875973007597480, guid: 08ddda89314b8ed4b920c4ba6cdd8954, type: 3}
@@ -5066,8 +5073,12 @@ MonoBehaviour:
   spawnsImpactWoods:
   - {fileID: 8727875973007597480, guid: 08ddda89314b8ed4b920c4ba6cdd8954, type: 3}
   - {fileID: 303101540322879502, guid: 0a01165dbcb69284eb5a095b5826878a, type: 3}
-  spawnsAutoDestroy: []
-  timeDuration: 1
+  spawnsEndDistance: []
+  colliderDisabled: []
+  distanceActiveColliders: 0
+  startPositionOrigin: {x: 0, y: 0}
+  directionOrigin: {x: 0, y: 0}
+  maxDistance: 0
 --- !u!1 &4777070124516398640
 GameObject:
   m_ObjectHideFlags: 0

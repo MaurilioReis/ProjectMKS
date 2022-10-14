@@ -111,11 +111,11 @@ public class AimDirectionAndFire : MonoBehaviour
             if (spawnOrigins[nSpawn] != null && spawnOrigins[nSpawn].gameObject.activeSelf)
             {
                 GameObject fire = Instantiate(weapons[registerSide].ammunition, spawnOrigins[nSpawn].position, spawnOrigins[nSpawn].rotation) as GameObject;
+
                 FireParameters scriptFire = fire.GetComponent<FireParameters>();
                 scriptFire.maxDistance = weapons[registerSide].GetComponent<ArmamentParameters>().maxDistance;
-
-                Rigidbody2D rbSpawns = fire.GetComponent<Rigidbody2D>();
-                rbSpawns.AddForce(spawnOrigins[nSpawn].transform.right * 150, ForceMode2D.Force);
+                scriptFire.startPositionOrigin = spawnOrigins[nSpawn].transform.position;
+                scriptFire.directionOrigin = spawnOrigins[nSpawn].right;
 
                 // audio
 
