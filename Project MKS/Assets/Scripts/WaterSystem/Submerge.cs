@@ -15,10 +15,14 @@ public class Submerge : MonoBehaviour
     public int percentChanceIncreaseTime;
     public float timeIncrease;
 
-    [Header("percentage chance of extending the time to submerge")]
+    [Header("Sprite to change the layer")]
     public SpriteRenderer[] spritesSubmerge;
+    [Header("Colliders to desactive")]
     public Collider2D[] colliders;
+    [Header("Objects active in start submerge")]
     public GameObject[] fx;
+    [Header("Objects desactive in start submerge")]
+    public GameObject[] desactiveInStart;
 
     bool inSubmerge;
 
@@ -55,6 +59,21 @@ public class Submerge : MonoBehaviour
             go.SetActive(true);
         }
 
+        foreach (GameObject go in desactiveInStart)
+        {
+            if (go != null)
+            {
+                go.transform.parent = null;
+
+                ParticleSystem ps = go.GetComponent<ParticleSystem>();
+
+                if (ps != null)
+                {
+                    ps.Stop(true);
+                }
+            }  
+        }
+
         inSubmerge = true;
     }
 
@@ -67,6 +86,18 @@ public class Submerge : MonoBehaviour
 
             if (transform.localScale.x <= 0)
             {
+                foreach (GameObject go in fx)
+                {
+                    go.transform.parent = null;
+
+                    ParticleSystem ps = go.GetComponent<ParticleSystem>();
+
+                    if (ps != null)
+                    {
+                        ps.Stop(true);
+                    }
+                }
+
                 Destroy(gameObject);
             }
         }

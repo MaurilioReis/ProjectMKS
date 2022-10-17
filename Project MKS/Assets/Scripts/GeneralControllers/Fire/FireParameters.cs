@@ -45,9 +45,12 @@ public class FireParameters : MonoBehaviour
     [Header("SET INSTANTIATE SPAWNS")]
 
     [Space(5)]
-
     [Header("Spawns in start")]
     public GameObject[] spawnsStart;
+
+    [Space(5)]
+    [Header("Spawns in new rb velocity")]
+    public GameObject[] spawnNewVelocity;
 
     [Space(5)]
     [Header("Spawns in timer")]
@@ -64,13 +67,29 @@ public class FireParameters : MonoBehaviour
 
     [Space(10)]
 
+    [Header("drop and desactive GameObject")]
+
+    [Space(5)]
+    [Header("Parent Null and stop particle in GameObject")]
+    public GameObject[] parentNull;
+
+    [Space(10)]
+
     [Header("CONTROLLER COLLIDER")]
 
     [Space(5)]
-
     [Header("Ignore collision on distance")]
     public Collider2D[] colliderDisabled;
     public float distanceActiveColliders;
+
+    [Space(10)]
+
+    [Header("SUBMERGE")]
+
+    [Space(5)]
+    [Header("active or desactive submerge system")]
+    public bool submerge = false;
+    Submerge sbmg;
 
     [HideInInspector]public Vector2 startPositionOrigin;
     [HideInInspector]public Vector2 directionOrigin;
@@ -82,6 +101,11 @@ public class FireParameters : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        foreach (Collider2D col in colliderDisabled)
+        {
+            col.enabled = false;
+        }
 
         if (distanceDirection != null)
         {
@@ -112,6 +136,11 @@ public class FireParameters : MonoBehaviour
         {
             StartCoroutine("TimerSpawns");
         }
+
+        if (submerge)
+        {
+            sbmg = gameObject.GetComponent<Submerge>();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -124,6 +153,18 @@ public class FireParameters : MonoBehaviour
             foreach (GameObject spawn in spawnsImpactWoods)
             {
                 GameObject intance = Instantiate(spawn, gameObject.transform.position, gameObject.transform.rotation);
+            }
+
+            foreach (GameObject go in parentNull)
+            {
+                go.transform.parent = null;
+
+                ParticleSystem ps = go.GetComponent<ParticleSystem>();
+
+                if (ps != null)
+                {
+                    ps.Stop(true);
+                }
             }
 
             Destroy(gameObject);
@@ -150,16 +191,42 @@ public class FireParameters : MonoBehaviour
             foreach (GameObject spawn in spawnsEndDistance)
             {
                 GameObject intance = Instantiate(spawn, gameObject.transform.position, gameObject.transform.rotation);
-                // Submerse
+            }
+
+            foreach (GameObject go in parentNull)
+            {
+                go.transform.parent = null;
+
+                ParticleSystem ps = go.GetComponent<ParticleSystem>();
+
+                if (ps != null)
+                {
+                    ps.Stop(true);
+                }
             }
 
             maxDistance = 0;
-            Destroy(gameObject);
+
+            if (sbmg != null)
+            {
+                rb.velocity = Vector2.zero;
+                sbmg.enabled = true;
+                Destroy(this);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         if (distanceAltereSpeed > 0 && distance >= distanceAltereSpeed)
         {
             rb.velocity = directionOrigin * distanceSpeed;
+
+            foreach (GameObject spawn in spawnNewVelocity)
+            {
+                GameObject intance = Instantiate(spawn, gameObject.transform.position, gameObject.transform.rotation);
+            }
 
             distanceAltereSpeed = 0;
         }
