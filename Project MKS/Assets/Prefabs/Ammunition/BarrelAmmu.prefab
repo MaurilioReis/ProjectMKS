@@ -233,10 +233,14 @@ MonoBehaviour:
   spawnsImpactWoods:
   - {fileID: 303101540322879502, guid: 0a01165dbcb69284eb5a095b5826878a, type: 3}
   - {fileID: 303101540322879502, guid: 0a01165dbcb69284eb5a095b5826878a, type: 3}
+  - {fileID: 9212827810423350438, guid: f2ed2094965285144a102b5406ce2f29, type: 3}
+  - {fileID: 2620139319855851802, guid: 289fe621ac62a80498c726d24a8ba52c, type: 3}
   spawnsEndDistance: []
+  parentNull: []
   colliderDisabled:
   - {fileID: 17289867412037452}
   distanceActiveColliders: 0.3
+  submerge: 0
   startPositionOrigin: {x: 0, y: 0}
   directionOrigin: {x: 0, y: 0}
   maxDistance: 0
@@ -306,6 +310,10 @@ PrefabInstance:
     - target: {fileID: 1982096962492148366, guid: 0527aafccff75d345ab0807915215c37, type: 3}
       propertyPath: m_Name
       value: TrailWater
+      objectReference: {fileID: 0}
+    - target: {fileID: 1982096962492148366, guid: 0527aafccff75d345ab0807915215c37, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0527aafccff75d345ab0807915215c37, type: 3}

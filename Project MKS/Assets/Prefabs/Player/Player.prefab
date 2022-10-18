@@ -137,7 +137,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -392,7 +392,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0.6156863, b: 0.9607843, a: 1}
+      maxColor: {r: 0, g: 0.6156863, b: 0.9607843, a: 0.5882353}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1036,7 +1036,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.7
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5302,7 +5302,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5681,7 +5681,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.7, y: 0.26}
+  m_Size: {x: 0.85, y: 0.3}
   m_Direction: 1
 --- !u!1 &2050802350
 GameObject:
@@ -5907,7 +5907,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.5882353}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -6551,7 +6551,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.7
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -10557,7 +10557,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10845,7 +10845,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11731,7 +11731,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 0.38}
+  m_Size: {x: 1.1, y: 0.38}
   m_Direction: 1
 --- !u!114 &6033288364371002739
 MonoBehaviour:
@@ -11946,7 +11946,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b047fdc2aaaa30245a6c0deea67af063, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12350,10 +12350,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 899078398}
     m_Modifications:
-    - target: {fileID: 2654119381119091695, guid: 5fbe4af28f6b4c54eb42554dee5a01b6, type: 3}
-      propertyPath: maxDistance
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 6647819195601856328, guid: 5fbe4af28f6b4c54eb42554dee5a01b6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -12402,42 +12398,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TripleCannon
       objectReference: {fileID: 0}
-    - target: {fileID: 6647819195996121889, guid: 5fbe4af28f6b4c54eb42554dee5a01b6, type: 3}
-      propertyPath: m_SortingLayer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6647819195996121889, guid: 5fbe4af28f6b4c54eb42554dee5a01b6, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 939682505
-      objectReference: {fileID: 0}
-    - target: {fileID: 6647819195996121889, guid: 5fbe4af28f6b4c54eb42554dee5a01b6, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 6647819196142085170, guid: 5fbe4af28f6b4c54eb42554dee5a01b6, type: 3}
-      propertyPath: m_SortingLayer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6647819196142085170, guid: 5fbe4af28f6b4c54eb42554dee5a01b6, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 939682505
-      objectReference: {fileID: 0}
-    - target: {fileID: 6647819196142085170, guid: 5fbe4af28f6b4c54eb42554dee5a01b6, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 6647819196519425308, guid: 5fbe4af28f6b4c54eb42554dee5a01b6, type: 3}
-      propertyPath: m_SortingLayer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6647819196519425308, guid: 5fbe4af28f6b4c54eb42554dee5a01b6, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 939682505
-      objectReference: {fileID: 0}
-    - target: {fileID: 6647819196519425308, guid: 5fbe4af28f6b4c54eb42554dee5a01b6, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fbe4af28f6b4c54eb42554dee5a01b6, type: 3}
 --- !u!4 &2101459762 stripped
@@ -12463,18 +12423,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 582476736}
     m_Modifications:
-    - target: {fileID: 7352375540163316313, guid: aea8bb7675f2593469ec9613124ab29e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7352375540163316313, guid: aea8bb7675f2593469ec9613124ab29e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.000019945204
-      objectReference: {fileID: 0}
-    - target: {fileID: 7352375540163316313, guid: aea8bb7675f2593469ec9613124ab29e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -359.998
-      objectReference: {fileID: 0}
     - target: {fileID: 7371341736647527878, guid: aea8bb7675f2593469ec9613124ab29e, type: 3}
       propertyPath: m_Name
       value: Barrel

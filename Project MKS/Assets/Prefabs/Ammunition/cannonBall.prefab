@@ -4983,23 +4983,23 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FalloffIntensity: 0.537
+  m_Color: {r: 1, g: 0.8791274, b: 0.4198113, a: 1}
   m_Intensity: 1
-  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensity: 0.3
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000a3bd4cf5d36fb0cd1f877b6d0ba6583fc96a02383fb1ae94
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 0
-  m_NormalMapDistance: 3
-  m_NormalMapQuality: 2
+  m_NormalMapDistance: 0.1
+  m_NormalMapQuality: 0
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensityEnabled: 1
   m_ShadowIntensity: 0.75
-  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensityEnabled: 1
   m_ShadowVolumeIntensity: 0.75
   m_Vertices:
   - position: {x: 0.9985302, y: 0.9985302, z: 0}
@@ -5077,7 +5077,7 @@ MonoBehaviour:
   - {fileID: 8727875973007597480, guid: 08ddda89314b8ed4b920c4ba6cdd8954, type: 3}
   - {fileID: 303101540322879502, guid: 0a01165dbcb69284eb5a095b5826878a, type: 3}
   - {fileID: 3969297662916924699, guid: efc7b8fc9b80a6c4daa36a611760616c, type: 3}
-  - {fileID: 4985862156631979748, guid: e25ae887dfb5e90449afdc72f08a2243, type: 3}
+  - {fileID: 8582401278096765093, guid: e25ae887dfb5e90449afdc72f08a2243, type: 3}
   spawnsEndDistance:
   - {fileID: 3969297662916924699, guid: efc7b8fc9b80a6c4daa36a611760616c, type: 3}
   parentNull: []
